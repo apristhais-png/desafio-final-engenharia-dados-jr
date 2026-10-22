@@ -32,6 +32,12 @@ def produtos_por_categoria(categoria):
     return executar_consulta(sql, (categoria,))
 
 
+def listar_categorias():
+    """Lista as categorias que existem na tabela de produtos (sem repetir)."""
+    sql = "SELECT DISTINCT categoria FROM produtos ORDER BY categoria"
+    return [linha[0] for linha in executar_consulta(sql)]
+
+
 def faturamento_por_categoria():
     """JOIN + WHERE + GROUP BY + SUM: quanto cada categoria vendeu (sem cancelados)."""
     sql = """
