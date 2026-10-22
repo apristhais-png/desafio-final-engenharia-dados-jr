@@ -11,9 +11,11 @@ Uma loja virtual simples, com banco **SQLite**, consultas em **SQL** e relatóri
 .
 ├── data/
 │   ├── schema.sql     # criação das tabelas
-│   └── seed.sql       # dados fictícios
+│   ├── seed.sql       # dados fictícios
+│   └── views.sql      # view vw_total_por_pedido
 ├── src/
-│   └── database.py    # conecta e monta o banco
+│   ├── database.py    # conecta e monta o banco
+│   └── queries.py     # consultas SQL (uma função por consulta)
 ├── requirements.txt
 └── README.md
 ```
@@ -39,4 +41,20 @@ Requisito: Python 3.10 ou superior (não precisa instalar nada além dele).
 python src/database.py
 ```
 
-O comando cria o arquivo `data/loja.db` com as tabelas e os dados de exemplo.
+O comando cria o arquivo `data/loja.db` com as tabelas, os dados de exemplo e a view.
+
+Para ver o resultado das consultas:
+
+```bash
+python src/queries.py
+```
+
+## Consultas
+
+| Função | O que responde | Recursos SQL |
+|---|---|---|
+| `listar_pedidos_com_clientes` | Quem fez cada pedido? | `JOIN` |
+| `produtos_por_categoria` | Quais produtos são de uma categoria? | `WHERE` |
+| `faturamento_por_categoria` | Quanto cada categoria vendeu? | `JOIN`, `WHERE`, `GROUP BY`, `SUM` |
+| `clientes_que_mais_gastam` | Quem mais gastou? | `VIEW`, `GROUP BY`, `COUNT`, `SUM` |
+| `ticket_medio_por_status` | Qual o valor médio por status? | `VIEW`, `GROUP BY`, `AVG` |
