@@ -22,11 +22,12 @@ def executar_arquivo_sql(conexao, nome_arquivo):
 
 
 def criar_banco():
-    """Recria o banco do zero: tabelas (schema.sql) + dados fictícios (seed.sql)."""
+    """Recria o banco do zero: tabelas, dados fictícios e views."""
     try:
         with conectar() as conexao:
             executar_arquivo_sql(conexao, "schema.sql")
             executar_arquivo_sql(conexao, "seed.sql")
+            executar_arquivo_sql(conexao, "views.sql")
         print(f"Banco criado com sucesso em: {CAMINHO_BANCO}")
     except (sqlite3.Error, OSError) as erro:
         print(f"Erro ao criar o banco: {erro}")
