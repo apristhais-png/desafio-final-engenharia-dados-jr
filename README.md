@@ -15,7 +15,8 @@ Uma loja virtual simples, com banco **SQLite**, consultas em **SQL** e relatóri
 │   └── views.sql      # view vw_total_por_pedido
 ├── src/
 │   ├── database.py    # conecta e monta o banco
-│   └── queries.py     # consultas SQL (uma função por consulta)
+│   ├── queries.py     # consultas SQL (uma função por consulta)
+│   └── main.py        # menu interativo no terminal
 ├── requirements.txt
 └── README.md
 ```
@@ -43,7 +44,27 @@ python src/database.py
 
 O comando cria o arquivo `data/loja.db` com as tabelas, os dados de exemplo e a view.
 
-Para ver o resultado das consultas:
+Depois, abra o menu interativo:
+
+```bash
+python src/main.py
+```
+
+```
+===== Mini Loja Segplan =====
+1. Listar pedidos com clientes
+2. Consultar produtos por categoria
+3. Ver faturamento por categoria
+4. Ver clientes que mais gastam
+5. Ver ticket médio por status
+6. Sair
+Escolha uma opção:
+```
+
+Digite o número da opção e tecle Enter. O menu fica aberto até você escolher `6`.
+Entradas inválidas (letras ou números fora da lista) mostram um aviso e o menu volta.
+
+Para ver o resultado bruto das consultas, sem menu:
 
 ```bash
 python src/queries.py
@@ -53,6 +74,7 @@ python src/queries.py
 
 | Função | O que responde | Recursos SQL |
 |---|---|---|
+| `listar_categorias` | Quais categorias existem? | `DISTINCT` |
 | `listar_pedidos_com_clientes` | Quem fez cada pedido? | `JOIN` |
 | `produtos_por_categoria` | Quais produtos são de uma categoria? | `WHERE` |
 | `faturamento_por_categoria` | Quanto cada categoria vendeu? | `JOIN`, `WHERE`, `GROUP BY`, `SUM` |
