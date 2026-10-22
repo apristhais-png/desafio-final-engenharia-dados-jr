@@ -1,0 +1,10 @@
+# Banco SQLite gerado pelo script (recriado a qualquer momento)
+data/*.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Ambiente virtual
+venv/
+.venv/
