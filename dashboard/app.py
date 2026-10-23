@@ -71,8 +71,15 @@ def estilizar(fig, titulo):
 st.title("📊 DataShop | Inteligência de Vendas")
 st.caption("Painel de vendas com dados fictícios lidos do banco SQLite do projeto.")
 
-if not dados.banco_existe():
-    st.error("Banco de dados não encontrado.")
+
+
+@st.cache_resource  # executa uma única vez por servidor, mesmo com vários acessos
+def preparar_banco():
+    return dados.garantir_banco()
+
+
+if not preparar_banco():
+    st.error("Não foi possível criar o banco de dados.")
     st.markdown("Crie o banco executando, na pasta do projeto:\n\n"
                 "```\npython src/database.py\n```\n\nDepois, recarregue esta página.")
     st.stop()

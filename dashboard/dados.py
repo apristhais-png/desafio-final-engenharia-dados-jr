@@ -7,7 +7,7 @@ import pandas as pd
 
 # Permite importar os módulos de src/ (reaproveitamos a conexão do projeto)
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
-from database import CAMINHO_BANCO, conectar  # noqa: E402
+from database import CAMINHO_BANCO, conectar, criar_banco  # noqa: E402
 
 STATUS_CANCELADO = "cancelado"
 
@@ -32,6 +32,17 @@ SQL_ITENS = """
 def banco_existe():
     """O banco existe se o arquivo loja.db já foi criado pelo database.py."""
     return CAMINHO_BANCO.exists()
+
+
+def garantir_banco():
+    """Cria o banco (schema + seed + views) somente se ele ainda não existir.
+
+    Usado na publicação online, onde o loja.db não vai junto com o GitHub.
+    Se o banco já existe, nada é apagado nem recriado.
+    """
+    if not banco_existe():
+        criar_banco()
+    return banco_existe()
 
 
 def carregar_itens():
