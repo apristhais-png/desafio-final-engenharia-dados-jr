@@ -1,4 +1,4 @@
--- Mini Loja Segplan: views (consultas salvas no banco)
+-- DataShop: views (consultas salvas no banco)
 DROP VIEW IF EXISTS vw_total_por_pedido;
 
 -- Um resumo por pedido: cliente, data, status e valor total

@@ -1,4 +1,4 @@
--- Mini Loja Segplan: criação das tabelas
+-- DataShop: criação das tabelas
 -- Apaga as tabelas antigas (filhas primeiro) para poder recriar o banco do zero.
 DROP TABLE IF EXISTS itens_pedido;
 DROP TABLE IF EXISTS pedidos;

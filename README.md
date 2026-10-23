@@ -1,4 +1,4 @@
-# Mini Loja Segplan
+# DataShop | Inteligência de Vendas
 
 Projeto acadêmico do **Desafio Final da Trilha de Engenharia de Dados JR**.
 Uma loja virtual simples, com banco **SQLite**, consultas em **SQL** e relatórios em **Python**.
@@ -72,7 +72,7 @@ python src/main.py
 ```
 
 ```
-===== Mini Loja Segplan =====
+===== DataShop | Inteligência de Vendas =====
 1. Listar pedidos com clientes
 2. Consultar produtos por categoria
 3. Ver faturamento por categoria
@@ -106,7 +106,7 @@ python src/queries.py
 
 Painel interativo de vendas com dados lidos do mesmo banco SQLite.
 
-![Dashboard da Mini Loja Segplan](docs/dashboard.png)
+![Dashboard do DataShop](docs/dashboard.png)
 
 - **Indicadores:** faturamento, pedidos, clientes, produtos e ticket médio.
 - **Gráficos:** faturamento por categoria, pedidos por status, faturamento por mês,

@@ -1,4 +1,4 @@
-"""Consultas SQL da Mini Loja Segplan. Cada função devolve uma lista de linhas."""
+"""Consultas SQL do DataShop. Cada função devolve uma lista de linhas."""
 
 from database import conectar
 

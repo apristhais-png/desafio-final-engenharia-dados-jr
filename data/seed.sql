@@ -1,4 +1,4 @@
--- Mini Loja Segplan: dados fictícios (nomes e e-mails inventados)
+-- DataShop: dados fictícios (nomes e e-mails inventados)
 
 INSERT INTO clientes (id, nome, email, cidade, data_cadastro) VALUES
     (1, 'Ana Ribeiro',     'ana.ribeiro@exemplo.com',     'Goiânia',           '2026-01-10'),
