@@ -34,6 +34,14 @@ st.markdown(
 )
 
 
+def sem_dados(tabela, titulo):
+    """Mostra um aviso no lugar do gráfico quando não há vendas válidas para exibir."""
+    if tabela.empty:
+        st.info(f"**{titulo}:** sem vendas válidas para os filtros escolhidos.")
+        return True
+    return False
+
+
 def grafico_barras(tabela, x, y, titulo, texto, hover):
     """Barra horizontal padrão do dashboard."""
     fig = px.bar(tabela, x=x, y=y, orientation="h", text=texto,
@@ -117,10 +125,11 @@ esq, dir_ = st.columns(2)
 
 with esq:
     tab = dados.faturamento_por_categoria(filtrados)
-    fig = grafico_barras(tab, "valor", "categoria", "Faturamento por categoria",
-                         tab["valor"].map(formatar_moeda), ["categoria"])
-    fig.update_traces(hovertemplate="%{customdata[0]}<br>R$ %{x:,.2f}<extra></extra>")
-    st.plotly_chart(fig, width="stretch")
+    if not sem_dados(tab, "Faturamento por categoria"):
+        fig = grafico_barras(tab, "valor", "categoria", "Faturamento por categoria",
+                             tab["valor"].map(formatar_moeda), ["categoria"])
+        fig.update_traces(hovertemplate="%{customdata[0]}<br>R$ %{x:,.2f}<extra></extra>")
+        st.plotly_chart(fig, width="stretch")
 
 with dir_:
     tab = dados.pedidos_por_status(filtrados)
@@ -131,7 +140,7 @@ with dir_:
     st.plotly_chart(estilizar(fig, "Pedidos por status"), width="stretch")
 
 tab = dados.vendas_por_mes(filtrados)
-if not tab.empty:
+if not sem_dados(tab, "Evolução do faturamento por mês"):
     fig = px.area(tab, x="mes", y="faturamento", markers=True,
                   color_discrete_sequence=[CIANO], custom_data=["pedidos"])
     fig.update_traces(line=dict(width=3),
@@ -144,18 +153,20 @@ esq, dir_ = st.columns(2)
 
 with esq:
     tab = dados.ranking_clientes(filtrados)
-    fig = grafico_barras(tab, "total", "cliente", "Clientes que mais compraram",
-                         tab["total"].map(formatar_moeda), ["pedidos"])
-    fig.update_traces(hovertemplate="%{y}<br>R$ %{x:,.2f}<br>%{customdata[0]} pedido(s)<extra></extra>")
-    st.plotly_chart(fig, width="stretch")
+    if not sem_dados(tab, "Clientes que mais compraram"):
+        fig = grafico_barras(tab, "total", "cliente", "Clientes que mais compraram",
+                             tab["total"].map(formatar_moeda), ["pedidos"])
+        fig.update_traces(hovertemplate="%{y}<br>R$ %{x:,.2f}<br>%{customdata[0]} pedido(s)<extra></extra>")
+        st.plotly_chart(fig, width="stretch")
 
 with dir_:
     tab = dados.produtos_mais_vendidos(filtrados)
-    fig = grafico_barras(tab, "quantidade", "produto", "Produtos mais vendidos (unidades)",
-                         tab["quantidade"], ["valor"])
-    fig.update_traces(marker_color=CIANO,
-                      hovertemplate="%{y}<br>%{x} un.<br>R$ %{customdata[0]:,.2f}<extra></extra>")
-    st.plotly_chart(fig, width="stretch")
+    if not sem_dados(tab, "Produtos mais vendidos"):
+        fig = grafico_barras(tab, "quantidade", "produto", "Produtos mais vendidos (unidades)",
+                             tab["quantidade"], ["valor"])
+        fig.update_traces(marker_color=CIANO,
+                          hovertemplate="%{y}<br>%{x} un.<br>R$ %{customdata[0]:,.2f}<extra></extra>")
+        st.plotly_chart(fig, width="stretch")
 
 with st.expander("Ver dados detalhados"):
     st.dataframe(
