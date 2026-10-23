@@ -1,4 +1,4 @@
-"""Dashboard de vendas da Mini Loja Segplan (Streamlit + Plotly)."""
+"""Dashboard de vendas do DataShop (Streamlit + Plotly)."""
 
 import sqlite3
 
@@ -14,7 +14,7 @@ AZUL = "#1D4ED8"
 CIANO = "#06B6D4"
 CORES_STATUS = {"enviado": AZUL, "pago": CIANO, "pendente": "#93C5FD", "cancelado": "#CBD5E1"}
 
-st.set_page_config(page_title="Mini Loja Segplan | Vendas", page_icon="📊", layout="wide")
+st.set_page_config(page_title="DataShop | Inteligência de Vendas", page_icon="📊", layout="wide")
 
 # Pequeno ajuste visual: cards brancos com borda lateral ciano
 st.markdown(
@@ -68,7 +68,7 @@ def estilizar(fig, titulo):
 
 
 # ---------- Carregamento dos dados ----------
-st.title("📊 Mini Loja Segplan")
+st.title("📊 DataShop | Inteligência de Vendas")
 st.caption("Painel de vendas com dados fictícios lidos do banco SQLite do projeto.")
 
 if not dados.banco_existe():

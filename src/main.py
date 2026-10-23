@@ -1,4 +1,4 @@
-"""Menu interativo no terminal da Mini Loja Segplan."""
+"""Menu interativo no terminal do DataShop."""
 
 import sqlite3
 
@@ -88,7 +88,7 @@ OPCAO_SAIR = 6
 
 
 def mostrar_menu():
-    print("\n===== Mini Loja Segplan =====")
+    print("\n===== DataShop | Inteligência de Vendas =====")
     for numero, (texto, _) in OPCOES.items():
         print(f"{numero}. {texto}")
     print(f"{OPCAO_SAIR}. Sair")

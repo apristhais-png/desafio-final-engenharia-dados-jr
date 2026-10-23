@@ -1,4 +1,4 @@
-"""Conexão com o banco SQLite e criação das tabelas da Mini Loja Segplan."""
+"""Conexão com o banco SQLite e criação das tabelas do DataShop."""
 
 import sqlite3
 from pathlib import Path
