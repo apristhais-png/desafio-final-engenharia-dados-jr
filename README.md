@@ -13,10 +13,18 @@ Uma loja virtual simples, com banco **SQLite**, consultas em **SQL** e relatóri
 │   ├── schema.sql     # criação das tabelas
 │   ├── seed.sql       # dados fictícios
 │   └── views.sql      # view vw_total_por_pedido
+├── dashboard/
+│   ├── app.py         # dashboard Streamlit (tela, filtros e gráficos)
+│   └── dados.py       # lê o SQLite e calcula os indicadores (pandas)
+├── docs/
+│   └── dashboard.png  # print do dashboard
 ├── src/
 │   ├── database.py    # conecta e monta o banco
 │   ├── queries.py     # consultas SQL (uma função por consulta)
 │   └── main.py        # menu interativo no terminal
+├── tests/
+│   └── test_dashboard.py  # confere os cálculos do dashboard com o SQL
+├── .streamlit/config.toml # cores do dashboard
 ├── requirements.txt
 └── README.md
 ```
@@ -37,7 +45,7 @@ clientes 1 ──< N pedidos 1 ──< N itens_pedido >── 1 produtos
 ## Como rodar
 
 Requisitos: [Python](https://www.python.org/downloads/) 3.10 ou superior e Git.
-Não há bibliotecas para instalar: o projeto usa só a biblioteca padrão do Python.
+O menu do terminal não precisa de bibliotecas extras. Só o dashboard (opcional) precisa.
 
 **1. Baixe o projeto e entre na pasta:**
 
@@ -93,3 +101,51 @@ python src/queries.py
 | `faturamento_por_categoria` | Quanto cada categoria vendeu? | `JOIN`, `WHERE`, `GROUP BY`, `SUM` |
 | `clientes_que_mais_gastam` | Quem mais gastou? | `VIEW`, `GROUP BY`, `COUNT`, `SUM` |
 | `ticket_medio_por_status` | Qual o valor médio por status? | `VIEW`, `GROUP BY`, `AVG` |
+
+## Dashboard (Streamlit)
+
+Painel interativo de vendas com dados lidos do mesmo banco SQLite.
+
+![Dashboard da Mini Loja Segplan](docs/dashboard.png)
+
+- **Indicadores:** faturamento, pedidos, clientes, produtos e ticket médio.
+- **Gráficos:** faturamento por categoria, pedidos por status, faturamento por mês,
+  clientes que mais compraram e produtos mais vendidos.
+- **Filtros:** categoria, status e período.
+- Pedidos **cancelados não entram** no faturamento, no ticket médio nem nos rankings.
+
+### Como executar
+
+Na pasta do projeto, crie um ambiente virtual e instale as dependências (só na primeira vez):
+
+**Windows**
+
+```bash
+py -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**macOS / Linux**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Depois, com o banco já criado (`python src/database.py`), abra o dashboard:
+
+```bash
+streamlit run dashboard/app.py
+```
+
+O navegador abre em `http://localhost:8501`. Para encerrar, use `Ctrl+C` no terminal.
+
+### Testes dos cálculos
+
+Confere se os números do dashboard batem com as consultas SQL do projeto:
+
+```bash
+python tests/test_dashboard.py
+```

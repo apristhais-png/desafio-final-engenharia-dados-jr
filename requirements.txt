@@ -1,2 +1,5 @@
-# Este projeto usa apenas a biblioteca padrão do Python (sqlite3).
-# Nenhuma dependência externa é necessária por enquanto.
+# O menu do terminal (src/) usa apenas a biblioteca padrão do Python (sqlite3).
+# Os pacotes abaixo são necessários somente para o dashboard (dashboard/).
+streamlit>=1.50
+pandas>=2.2
+plotly>=5.24
