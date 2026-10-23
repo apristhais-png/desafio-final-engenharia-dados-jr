@@ -36,15 +36,28 @@ clientes 1 ──< N pedidos 1 ──< N itens_pedido >── 1 produtos
 
 ## Como rodar
 
-Requisito: Python 3.10 ou superior (não precisa instalar nada além dele).
+Requisitos: [Python](https://www.python.org/downloads/) 3.10 ou superior e Git.
+Não há bibliotecas para instalar: o projeto usa só a biblioteca padrão do Python.
+
+**1. Baixe o projeto e entre na pasta:**
+
+```bash
+git clone https://github.com/apristhais-png/desafio-final-engenharia-dados-jr.git
+cd desafio-final-engenharia-dados-jr
+```
+
+**2. Crie o banco:**
 
 ```bash
 python src/database.py
 ```
 
+> **Windows:** se o comando `python` não for reconhecido, use `py` no lugar
+> (ex.: `py src\database.py` e `py src\main.py`). No macOS/Linux pode ser `python3`.
+
 O comando cria o arquivo `data/loja.db` com as tabelas, os dados de exemplo e a view.
 
-Depois, abra o menu interativo:
+**3. Abra o menu interativo:**
 
 ```bash
 python src/main.py
