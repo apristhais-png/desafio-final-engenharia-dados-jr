@@ -134,13 +134,31 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Depois, com o banco já criado (`python src/database.py`), abra o dashboard:
+Depois, abra o dashboard (se o banco ainda não existir, ele é criado automaticamente):
 
 ```bash
 streamlit run dashboard/app.py
 ```
 
 O navegador abre em `http://localhost:8501`. Para encerrar, use `Ctrl+C` no terminal.
+
+### Publicar no Streamlit Community Cloud (gratuito)
+
+O `data/loja.db` não vai para o GitHub. Por isso, ao abrir pela primeira vez, o dashboard cria o banco
+sozinho a partir de `schema.sql`, `seed.sql` e `views.sql`. Se o banco já existir, nada é apagado.
+Não há senhas nem credenciais: todos os dados são fictícios.
+
+1. Acesse [share.streamlit.io](https://share.streamlit.io) e entre com sua conta do GitHub.
+2. Clique em **Create app** → **Deploy a public app from GitHub**.
+3. Preencha:
+   - **Repository:** `apristhais-png/desafio-final-engenharia-dados-jr`
+   - **Branch:** `main`
+   - **Main file path:** `dashboard/app.py`
+4. Em **Advanced settings**, escolha **Python 3.12**.
+5. Clique em **Deploy**. Em alguns minutos, você recebe um link público (`https://....streamlit.app`).
+
+O Cloud instala as dependências do `requirements.txt` e usa as cores do `.streamlit/config.toml`
+automaticamente. A cada novo commit na `main`, o app é atualizado sozinho.
 
 ### Testes dos cálculos
 
